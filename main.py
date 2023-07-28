@@ -147,7 +147,7 @@ def CheckForWin(GameArea : list) -> bool:
 def greedy(GameArea : list, move: int, level : int, maxLevel : int,parents: list) -> list:
     parents.append(GameArea)
 
-    if CheckForWin(GameArea):
+    if CheckForWin(GameArea) or CheckForDraw(GameArea):
         return [GameArea,parents]
     if level == maxLevel:
         return [GameArea,parents]
@@ -204,4 +204,3 @@ def play(GameArea: list):
             print("Game ended")
             break
 play(GameArea)
-# BFS(GameArea)
