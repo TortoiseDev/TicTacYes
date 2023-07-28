@@ -22,6 +22,7 @@ def generatePossibleMoves(GameArea : list, move : int) -> list:
                 solutions.append(solution)
     return solutions
 
+
 def CheckTurn(GameArea: list) -> int:
     sumX = sum(row.count("X") for row in GameArea)
     sumO = sum(row.count("O") for row in GameArea)
@@ -127,13 +128,13 @@ def Heurstic(GameArea : list, move : int) -> int:
             score2 -= 15
 
         if [GameArea[b][b] for b in range(0,3)].count("X") > 1:
-            score1 -= 10
+            score2 -= 10
         if [GameArea[b][b] for b in range(0,3)].count("X") == 1:
-            score1 += 5
+            score2 += 5
         if [GameArea[2-b][b] for b in range(0,3)].count("X") > 1:
-            score1 -= 10
+            score2 -= 10
         if [GameArea[2-b][b] for b in range(0,3)].count("X") == 1:
-            score1 += 5
+            score2 += 5
 
         if GameArea[0][2] == GameArea[1][1] == GameArea[2][0] == player:
             score2 -= 100
