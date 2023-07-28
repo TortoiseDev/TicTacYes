@@ -21,7 +21,7 @@ def generatePossibleMoves(GameArea : list, move : int) -> list:
                 solution : list= [row[:] for row in newAreaEdited]
                 solutions.append(solution)
     return solutions
-    
+
 def CheckTurn(GameArea: list) -> int:
     sumX = sum(row.count("X") for row in GameArea)
     sumO = sum(row.count("O") for row in GameArea)
@@ -39,11 +39,11 @@ def Heurstic(GameArea : list, move : int) -> int:
             if GameArea[row][0] == GameArea[row][1] == GameArea[row][2] == player:
                 score1 += 100
             elif GameArea[row][0] == GameArea[row][1] == player and GameArea[row][2] == "N":
-                score1 +=10
+                score1 +=15
             elif GameArea[row][0] == GameArea[row][2] == player and GameArea[row][1] == "N":
-                score1 +=10   
+                score1 +=15   
             elif GameArea[row][2] == GameArea[row][1] == player and GameArea[row][0] == "N":
-                score1 +=10
+                score1 +=15
             if GameArea[row].count("O") >1:
                 score1+=10
             if GameArea[row].count("O") == 1:
@@ -53,11 +53,11 @@ def Heurstic(GameArea : list, move : int) -> int:
             if GameArea[0][col] == GameArea[1][col] == GameArea[2][col] == player:
                 score1 += 100
             elif GameArea[0][col] == GameArea[1][col] == player and GameArea[2][col] == "N":
-                score1 +=10
+                score1 +=15
             elif GameArea[0][col] == GameArea[2][col] == player and GameArea[1][col] == "N":
-                score1 +=10   
+                score1 +=15   
             elif GameArea[2][col] == GameArea[1][col] == player and GameArea[0][col] == "N":
-                score1 +=10
+                score1 +=15
             if [GameArea[b][col] for b in range(0,3)].count("O") > 1:
                 score1 += 10
             if [GameArea[b][col] for b in range(0,3)].count("O") == 1:
@@ -66,31 +66,38 @@ def Heurstic(GameArea : list, move : int) -> int:
         if GameArea[0][0] == GameArea[1][1] == GameArea[2][2] == player:
             score1 += 100
         elif GameArea[0][0] == GameArea[1][1] == player and GameArea[2][2] == "N":
-            score1 += 10
+            score1 += 15
         elif GameArea[1][1] == GameArea[2][2] == player and GameArea[0][0] == "N":
-            score1 += 10
+            score1 += 15
         elif GameArea[0][0] == GameArea[2][2] == player and GameArea[1][1] == "N":
+            score1 += 15
+        if [GameArea[b][b] for b in range(0,3)].count("O") > 1:
             score1 += 10
-
+        if [GameArea[b][b] for b in range(0,3)].count("O") == 1:
+            score1 -= 5
+        if [GameArea[2-b][b] for b in range(0,3)].count("O") > 1:
+            score1 += 10
+        if [GameArea[2-b][b] for b in range(0,3)].count("O") == 1:
+            score1 -= 5
         if GameArea[0][2] == GameArea[1][1] == GameArea[2][0] == player:
             score1 += 100
         elif GameArea[0][2] == GameArea[1][1] == player and GameArea[2][0] == "N":
-            score1 += 10
+            score1 += 15
         elif GameArea[1][1] == GameArea[2][0] == player and GameArea[0][2] == "N":
-            score1 += 10
+            score1 += 15
         elif GameArea[0][2] == GameArea[2][0] == player and GameArea[1][1] == "N":
-            score1 += 10
+            score1 += 15
         
     for player in {"O"}:
         for row in range(0,3):
             if GameArea[row][0] == GameArea[row][1] == GameArea[row][2] == player:
                 score2 -= 100
             elif GameArea[row][0] == GameArea[row][1] == player and GameArea[row][2] == "N":
-                score2 -=10
+                score2 -=15
             elif GameArea[row][0] == GameArea[row][2] == player and GameArea[row][1] == "N":
-                score2 -=10   
+                score2 -=15   
             elif GameArea[row][2] == GameArea[row][1] == player and GameArea[row][0] == "N":
-                score2 -=10
+                score2 -=15
             if GameArea[row].count("X") > 1:
                 score2 -=10
             if GameArea[row].count("X") == 1:
@@ -100,11 +107,11 @@ def Heurstic(GameArea : list, move : int) -> int:
             if GameArea[0][col] == GameArea[1][col] == GameArea[2][col] == player:
                 score2 -= 100
             elif GameArea[0][col] == GameArea[1][col] == player and GameArea[2][col] == "N":
-                score2 -=10
+                score2 -=15
             elif GameArea[0][col] == GameArea[2][col] == player and GameArea[1][col] == "N":
-                score2 -=10   
+                score2 -=15   
             elif GameArea[2][col] == GameArea[1][col] == player and GameArea[0][col] == "N":
-                score2 -=10
+                score2 -=15
             if [GameArea[b][col] for b in range(0,3)].count("X") > 1:
                 score2 -= 10
             if [GameArea[b][col] for b in range(0,3)].count("X") == 1:
@@ -113,20 +120,29 @@ def Heurstic(GameArea : list, move : int) -> int:
         if GameArea[0][0] == GameArea[1][1] == GameArea[2][2] == player:
             score2 -= 100
         elif GameArea[0][0] == GameArea[1][1] == player and GameArea[2][2] == "N":
-            score2 -= 10
+            score2 -= 15
         elif GameArea[1][1] == GameArea[2][2] == player and GameArea[0][0] == "N":
-            score2 -= 10
+            score2 -= 15
         elif GameArea[0][0] == GameArea[2][2] == player and GameArea[1][1] == "N":
-            score2 -= 10
+            score2 -= 15
+
+        if [GameArea[b][b] for b in range(0,3)].count("X") > 1:
+            score1 -= 10
+        if [GameArea[b][b] for b in range(0,3)].count("X") == 1:
+            score1 += 5
+        if [GameArea[2-b][b] for b in range(0,3)].count("X") > 1:
+            score1 -= 10
+        if [GameArea[2-b][b] for b in range(0,3)].count("X") == 1:
+            score1 += 5
 
         if GameArea[0][2] == GameArea[1][1] == GameArea[2][0] == player:
             score2 -= 100
         elif GameArea[0][2] == GameArea[1][1] == player and GameArea[2][0] == "N":
-            score2 -= 10
+            score2 -= 15
         elif GameArea[1][1] == GameArea[2][0] == player and GameArea[0][2] == "N":
-            score2 -= 10
+            score2 -= 15
         elif GameArea[0][2] == GameArea[2][0] == player and GameArea[1][1] == "N":
-            score2 -= 10
+            score2 -= 15
         
     return score1 + score2
         
@@ -209,7 +225,7 @@ def play(GameArea: list):
         if CheckForWin(GameArea) or CheckForDraw(GameArea):
             print("Game ended")
             break
-        GameArea = greedy(GameArea,CheckTurn(GameArea),1,4,[])[1][1]
+        GameArea = greedy(GameArea,CheckTurn(GameArea),1,9,[])[1][1]
         if CheckForWin(GameArea) or CheckForDraw(GameArea):
             display(GameArea)
             print("Game ended")
