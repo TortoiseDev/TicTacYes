@@ -46,6 +46,8 @@ def Heurstic(GameArea : list, move : int) -> int:
                 score1 +=10
             if GameArea[row].count("O") >1:
                 score1-=10
+            if GameArea[row].count("O") == 1:
+                score1-=5
 
         for col in range(0,3):
             if GameArea[0][col] == GameArea[1][col] == GameArea[2][col] == player:
@@ -87,6 +89,8 @@ def Heurstic(GameArea : list, move : int) -> int:
                 score2 -=10
             if GameArea[row].count("X") > 1:
                 score2 +=10
+            if GameArea[row].count("X") == 1:
+              score2 +=5
 
         for col in range(0,3):
             if GameArea[0][col] == GameArea[1][col] == GameArea[2][col] == player:
@@ -204,3 +208,4 @@ def play(GameArea: list):
             print("Game ended")
             break
 play(GameArea)
+
