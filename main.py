@@ -21,44 +21,6 @@ def generatePossibleMoves(GameArea : list, move : int) -> list:
                 solution : list= [row[:] for row in newAreaEdited]
                 solutions.append(solution)
     return solutions
-    
-# def BFS(GameArea: list):
-#     frontier : list= []
-#     frontier.append(GameArea)
-#     visited : list = []
-#     while frontier:
-#         state = frontier.pop(0)
-#         visited.append(state)
-#         if CheckForWin(state):
-#             break
-#         solutions = generatePossibleMoves(state,CheckTurn(state))
-#         if not solutions:
-#             break
-#         for sol in solutions:
-#             if sol not in visited and sol not in frontier:
-#                 frontier.append(sol)
-#     print("Found ")
-#     display(state)
-
-
-# def DFS(GameArea: list):
-#     frontier : list= []
-#     frontier.append(GameArea)
-#     visited : list = []
-#     while frontier:
-#         state = frontier.pop(len(frontier)-1)
-#         visited.append(state)
-#         if CheckForWin(state):
-#             break
-#         solutions = generatePossibleMoves(state,CheckTurn(state))
-#         if not solutions:
-#             break
-#         for sol in solutions:
-#             if sol not in visited and sol not in frontier:
-#                 frontier.append(sol)
-#     print("Found ")
-#     display(state)
-
 
 def CheckTurn(GameArea: list) -> int:
     sumX = sum(row.count("X") for row in GameArea)
